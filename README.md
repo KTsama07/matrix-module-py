@@ -105,6 +105,5 @@ a.inverse()     # inverse matrix (square, non-singular matrices only)
 ## Notes & Known Limitations
 
 - `det()` uses naive recursive cofactor expansion, so it runs in roughly `O(n!)` time — fine for small matrices, but slow for large ones.
-- `__pow__` only supports non-negative integer powers and requires a square matrix.
-- `inverse()` checks for a zero determinant, but on a singular matrix it just `print()`s "Matrix is singular" and implicitly returns `None`. Code that doesn't check the return value before using it further will hit an `AttributeError` on the `None` result — raising a `ValueError` instead would be more robust and idiomatic.
+- `inverse()` checks for a zero determinant, but on a singular matrix it just `print()`s "Matrix is singular" and implicitly returns `None`. Code that doesn't check the return value before using it further will hit an `AttributeError` on the `None` result 
 - Operations like `+`, `-`, and `*` assume compatible dimensions and raise `ValueError` otherwise.
