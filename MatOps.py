@@ -135,10 +135,10 @@ class Matrix:
         return  cfm_mat.transpose()
 
     def inverse(self):
-          n= self.rows
+          n = self.rows
           a = self.det()
           if a==0:
-              return print("Matrix is singular")
+              return ValueError("Matrix is singular")
           return self.adj()/a
           
           
