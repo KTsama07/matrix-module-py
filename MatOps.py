@@ -3,7 +3,7 @@ class Matrix:
         self.rows = rows
         self.cols = cols
         if data is not None:
-            if len(data) != rows or any(len(rows) != cols for rows in data):
+            if len(data) != rows or any(len(row) != cols for row in data):
                 raise ValueError("Injected data dimensions do not match rows/cols")
             self.data = data
         else:
@@ -19,6 +19,12 @@ class Matrix:
             output.append(row_str)
         return "\n".join(output)
     def __add__(self,other: 'Matrix') -> 'Matrix':
+        if isinstance(other,(int,float)):
+            result = Matrix(self.rows, self.cols)
+            for i in range(self.rows):
+              for j in range(self.cols):
+                result.data[i][j]= self.data[i][j]+other
+            return result
         if self.rows != other.rows or self.cols != other.cols:
             raise ValueError("Matrix dimension must  be same")
         result = Matrix(self.rows, self.cols)
@@ -27,6 +33,12 @@ class Matrix:
                 result.data[i][j]= self.data[i][j] + other.data[i][j]
         return result
     def __sub__(self,other):
+        if isinstance(other,(int,float)):
+            result = Matrix(self.rows, self.cols)
+            for i in range(self.rows):
+              for j in range(self.cols):
+                result.data[i][j]= self.data[i][j]-other
+            return result
         if self.rows != other.rows or self.cols != other.cols:
             raise ValueError("Matrix dimension must  be same")
         result = Matrix(self.rows, self.cols)
@@ -57,6 +69,8 @@ class Matrix:
     def __truediv__(self,other):
         if not isinstance(other,(int,float)):
             raise ValueError("Divisor is not an integer")
+        if other==0:
+            raise ValueError("Division by zero is not allowed")
         result = Matrix(self.rows,self.cols)
         for i in range(self.rows):
             for j in range(self.cols):
