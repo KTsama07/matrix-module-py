@@ -81,10 +81,11 @@ class Matrix:
             for i in range(self.rows):
                 result.data[i][i]=1
             return result
-        if power==(-1):
+        base_matrix = self
+        if power<0:
             result= self.inverse()
-            return result
-        result = self
+            power== abs(power)
+        result = base_matrix
         for _ in range(power - 1):
             result = result * self
         return result
@@ -156,6 +157,7 @@ mat4.data = [[1,2,3],[4,0,6]]
 mat5 = Matrix(2,2)
 mat5.data = [[1,2],[4,6]]
 mat6 = Matrix(3,3)
-mat6.data = [[7,8,9],[10,11,12],[13,14,15]]
+mat6.data = [[7,8,9],[10,11,12],[13,14,15]]"""
 mat7 = Matrix(3,3)
-mat7.data = [[7,8,9],[12,11,19],[13,14,15]]"""
+mat7.data = [[7,8,9],[12,11,19],[13,14,15]]
+print(mat7**-2)
